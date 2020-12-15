@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -72,4 +72,3 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 =======
 # React-Phonebook
 Simple React Redux MongoDb App Include Browse Read Edit Add and Delete feature.
->>>>>>> 784f87d5bc66c71f3763cfb69ef1033e1a37dcff
