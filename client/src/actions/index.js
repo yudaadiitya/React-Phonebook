@@ -7,7 +7,7 @@ const request = axios.create({
     timeout: 1000
 });
 
-// start load Phonebook data
+//========== LOAD PHONEBOOK DATA
 export const loadPhonebookSuccess = (phonebooks) => ({
     type: 'LOAD_PHONEBOOK_SUCCESS',
     phonebooks
@@ -30,9 +30,9 @@ export const loadPhonebook = () => {
     }
 }
 
-// end load Phonebook data
+//==============================================
 
-// start add Phonebook data
+//========== ADD PHONEBOOK
 
 export const addPhonebookSuccess = (phonebooks) => ({
     type: 'ADD_PHONEBOOK_SUCCESS',
@@ -63,7 +63,10 @@ export const addPhonebook = (name, phone) => {
     }
 }
 
-// start delete Phonebook data
+//==============================================
+
+
+//========== DELETE PHONEBOOK
 
 const deletePhonebookRedux = (id) => ({
     type: 'DELETE_PHONEBOOK', id
@@ -93,8 +96,10 @@ export const deletePhonebook = (id) => {
     }
 }
 
-// end delete Phonebook data
+//==============================================
 
+
+//========== RESEND PHONEBOOK DATA
 export const resendPhonebookSuccess = (id) => ({
     type: 'RESEND_PHONEBOOK_SUCCESS',
     id
@@ -120,7 +125,10 @@ export const resendPhonebook = (id, name, phone) => {
     }
 }
 
-// EDIT
+//==============================================
+
+
+//========== EDIT PHONEBOOK DATA
 
 export const editPhonebookSuccess = phonebooks => ({
     type: 'EDIT_PHONEBOOK_SUCCESS',
@@ -139,16 +147,6 @@ const editPhonebookRedux = (id, name, phone) => ({
     phone
 });
 
-export const editON = (Id) => ({
-    type: 'EDIT_ON',
-    Id
-})
-
-export const editOFF = (Id) => ({
-    type: 'EDIT_OFF',
-    Id
-})
-
 export const editPhonebook = (id, name, phone) => {
     return dispatch => {
         dispatch(editPhonebookRedux(id, name, phone));
@@ -163,15 +161,3 @@ export const editPhonebook = (id, name, phone) => {
             });
     };
 };
-
-// SEARCH
-
-
-export const searchContact = (value) => ({
-    type: "SEARCH_CONTACT",
-    value: value.trim()
-})
-
-export const searchContactReset = () => ({
-    type: "SEARCH_CONTACT_RESET"
-})
