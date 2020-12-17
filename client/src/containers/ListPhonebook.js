@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import ItemPhonebook from './Phonebook'
 import { connect } from 'react-redux'
 import { loadPhonebook } from '../actions'
-import EditPhonebook from './EditPhonebook'
-
+import SearchPhonebook from './SearchPhonebook'
+import { handleChangeNameSearch } from './SearchPhonebook'
+import { handleChangePhoneSearch } from './SearchPhonebook'
 
 class ListPhonebook extends Component {
     constructor(props) {
@@ -14,6 +15,7 @@ class ListPhonebook extends Component {
         }
         this.handleChangeNameSearch = this.handleChangeNameSearch.bind(this);
         this.handleChangePhoneSearch = this.handleChangePhoneSearch.bind(this);
+        this.handleReset = this.handleReset.bind(this);
     }
 
     componentDidMount() {
@@ -27,23 +29,29 @@ class ListPhonebook extends Component {
     handleChangePhoneSearch(e) {
         this.setState({ phoneSearch: e.target.value })
     }
-
-    search(){
-        const { nameSearch, phoneSearch } = this.state;
+    handleReset(event) {
+        event.preventDefault();
+        this.setState({
+            nameSearch: '', phoneSearch: ''
+        })
+    }
+    search() {
+        const { nameSearch, phoneSearch } = this.props;
         return (
             <div className='card'>
-                <div className='card-header'>
+                <div className='card-header' style={{ backgroundColor: 'rgb(50, 100, 101)', color: 'white' }}>
                     Search Form
                     </div>
                 <div className='card-body'>
                     <form>
+
                         <div className="form-inline">
                             <label className="my-1 mr-2 mx-sm-1">Name</label>
                             <input
                                 className="form-control mx-sm-1"
                                 type="text"
-                                name="nameFilter"
-                                placeholder="Name"
+                                name="nameSearch"
+                                placeholder="Name Contact"
                                 value={nameSearch}
                                 onChange={this.handleChangeNameSearch}
                             />
@@ -51,11 +59,14 @@ class ListPhonebook extends Component {
                             <input
                                 className="form-control mx-sm-1"
                                 type="text"
-                                name="phoneFilter"
+                                name="phoneSearch"
                                 value={phoneSearch}
-                                placeholder="Phone"
+                                placeholder="Number Phone"
                                 onChange={this.handleChangePhoneSearch}
                             />
+                            <div className="form-group mr-2">
+                                <button type="submit" onClick={this.handleReset} className="btn btn-warning"><i className="fas fa-undo"></i> Reset</button>
+                            </div>
                         </div>
                     </form>
                 </div>

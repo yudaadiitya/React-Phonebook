@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { addPhonebook, searchContact, searchContactReset } from '../actions'
+import { addPhonebook } from '../actions'
 
 class FormPhonebook extends Component {
     constructor(props) {
@@ -73,47 +73,23 @@ class FormPhonebook extends Component {
                         <button className="btn mr-2 btn-primary" type="button" data-toggle="collapse" data-target="#addForm" aria-expanded="false" aria-controls="addForm">
                             <i className="fas fa-plus"></i> Add
                         </button>
-                        {/* <button className="btn my-4 mr-2 btn-secondary" onClick={this.handleButtonSearch} type="button" data-toggle="collapse" data-target="#searchForm" aria-expanded="false" aria-controls="searchForm">
-                            <i className="fas fa-search"></i> Search
-                        </button> */}
                     </p>
                     <div className="collapse" id="addForm">
-                        <div className="card-header"
-                            style={{ backgroundColor: 'rgb(50, 100, 101)', color: 'white' }}>ADD CONTACT</div>
-                        <div className="card-body">
-                            <div className="form-inline">
-                                <label className="my-1 mr-2 mx-sm-1" placeholder="Name" >Name</label>
-                                <input className="form-control mx-sm-1" type="text" value={this.state.name} onChange={this.handleChangeName} />
-                                <label className="my-1 mr-2 mx-sm-1" placeholder="Phone" >Phone</label>
-                                <input className="form-control mx-sm-1" type="text" value={this.state.phone} onChange={this.handleChangePhone} />
-                                <button className="btn btn-success" type="submit" onClick={this.handleSubmit}><i className="fas fa-save"></i> Simpan</button>
-                                <button type="button" className="btn btn-danger" data-toggle="collapse" data-target="#addForm" aria-expanded="false" aria-controls="addForm"><i className="fas fa-times"></i> Cancel</button>
-                            </div>
-                        </div>
-                    </div >
-                    {/* <div className="collapse mt-3" id="searchForm">
-                        <div className="card-header"
-                            style={{ backgroundColor: 'rgb(50, 100, 101)', color: 'white' }}>SEARCH CONTACT</div>
-                        <div className="card card-body">
-                            <div className="form-row">
-                                <div className="form-group col-md-4">
-                                    <div className="input-group">
-                                        <div className="input-group-prepend">
-                                            <span className="input-group-text" id="basic-addon2" htmlFor="inlineFormInputGroup"><i
-                                                className="fas fa-user"></i></span>
-                                        </div>
-                                        <input type="text" id="inlineFormInputGroup" className="form-control" placeholder="Name / Phone Number" value={this.state.value} onChange={this.handleFilterChange} />
-                                    </div>
-                                </div>
-                                <div className="form-group mr-2">
-                                    <button type="button" onClick={this.handleReset} className="btn "><i className="fas fa-undo"></i> Reset</button>
-                                </div>
-                                <div className="form-group">
-                                    <button type="button" onClick={this.handleButtonCancel} className="btn" data-toggle="collapse" data-target="#searchForm" aria-expanded="false" aria-controls="searchForm"><i className="fas fa-times"></i> Cancel</button>
+                        <div className="card">
+                            <div className="card-header"
+                                style={{ backgroundColor: 'rgb(50, 100, 101)', color: 'white' }}>ADD CONTACT</div>
+                            <div className="card-body">
+                                <div className="form-inline">
+                                    <label className="my-1 mr-2 mx-sm-1"  >Name</label>
+                                    <input className="form-control mx-sm-1" placeholder="Name Contact" type="text" value={this.state.name} onChange={this.handleChangeName} />
+                                    <label className="my-1 mr-2 mx-sm-1"  >Phone</label>
+                                    <input className="form-control mx-sm-1" placeholder="Number Phone" type="text" value={this.state.phone} onChange={this.handleChangePhone} />
+                                    <button className="btn btn-success" type="submit" onClick={this.handleSubmit}><i className="fas fa-save"></i> Simpan</button>
+                                    <button type="button" className="btn btn-danger" data-toggle="collapse" data-target="#addForm" aria-expanded="false" aria-controls="addForm"><i className="fas fa-times"></i> Cancel</button>
                                 </div>
                             </div>
-                        </div>
-                    </div> */}
+                        </div >
+                    </div>
                 </form>
             </div >
         );
@@ -122,9 +98,7 @@ class FormPhonebook extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-    addPhonebook: (name, phone) => dispatch(addPhonebook(name, phone)),
-    searchContact: (value) => { dispatch(searchContact(value)) },
-    searchContactReset: () => { dispatch(searchContactReset()) }
+    addPhonebook: (name, phone) => dispatch(addPhonebook(name, phone))
 })
 
 export default connect(

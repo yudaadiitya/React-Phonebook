@@ -1,11 +1,11 @@
 import { connect } from 'react-redux'
-import { editON, deletePhonebook, resendPhonebook } from '../actions'
+import { deletePhonebook, resendPhonebook, editPhonebook } from '../actions'
 import ItemPhonebook from '../components/ItemPhonebook'
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     hapus : () => dispatch(deletePhonebook(ownProps.id)),
     ulang : () => dispatch(resendPhonebook(ownProps.id, ownProps.name, ownProps.phone)),
-    edit : () => dispatch(editON(ownProps.id))
+    edit : (name,phone) => dispatch(editPhonebook(ownProps.id, name, phone))
 })
 
 export default connect(

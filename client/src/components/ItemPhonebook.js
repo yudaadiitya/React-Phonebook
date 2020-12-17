@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { editPhonebook, deletePhonebook, resendPhonebook } from '../actions';
 
-class ItemContact extends Component {
+
+export default class ItemContact extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -32,7 +31,7 @@ class ItemContact extends Component {
         event.preventDefault();
         const { name, phone } = this.state;
         if (name && phone) {
-            this.props.editPhonebook(name, phone);
+            this.props.edit(name, phone);
             this.setState({ editButton: false });
         }
     }
@@ -49,12 +48,13 @@ class ItemContact extends Component {
 
     handleDelete() {
         const { id } = this.state;
-        this.props.deletePhonebook(id);
+        this.props.hapus(id);
     }
 
-    handleResend() {
+    handleResend(event) {
+        event.preventDefault();
         const { id, name, phone } = this.state;
-        this.props.resendPhonebook(id, name, phone);
+        this.props.ulang(id, name, phone);
     }
 
     item() {
@@ -66,22 +66,16 @@ class ItemContact extends Component {
                 <td>{name}</td>
                 <td>{phone}</td>
                 <td>
-                    <button
-                        type="submit"
-                        className="btn btn-info"
-                        onClick={this.handleEditButton}
-                    >
-                        <i className="fas fa-pencil-alt mr-1" />
-                        Edit
-                    </button>
-                    <button
-                        type="submit"
-                        className="btn btn-danger ml-3"
-                        onClick={sent ? this.handleDelete : this.handleResend}
-                    >
-                        {sent ? <i className="far fa-trash-alt mr-1" /> : <i className="fas fa-redo" />}
-                        {sent ? 'Delete' : 'Resend'}
-                    </button>
+                    {sent ? (
+                        <div>
+                            <button type="submit" className="btn mr-2" onClick={this.handleEditButton}>
+                                <i className="fas fa-pencil-alt"></i> Edit</button>
+                            <button type="button" className="btn" onClick={this.handleDelete}><i className="fas fa-trash"></i> Delete</button>
+                        </div>
+                    ) :
+                        <button type="button" onClick={this.handleResend} className="btn">
+                            <i className="fas fa-sync-alt"></i> Resend</button>
+                    }
                 </td>
             </tr>
         )
@@ -142,13 +136,4 @@ class ItemContact extends Component {
     }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-    deletePhonebook: () => dispatch(deletePhonebook(ownProps.id)),
-    resendPhonebook: () => dispatch(resendPhonebook(ownProps.id, ownProps.name, ownProps.phone)),
-    editPhonebook: (name, phone) => dispatch(editPhonebook(ownProps.id, name, phone))
-})
 
-export default connect(
-    null,
-    mapDispatchToProps
-)(ItemContact);
